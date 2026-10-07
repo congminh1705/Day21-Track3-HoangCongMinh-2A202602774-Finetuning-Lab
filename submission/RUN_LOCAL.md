@@ -5,8 +5,7 @@ Cấu hình phiên chạy: RTX 3050 Ti Laptop 4 GB, Qwen/Qwen3.5-0.8B, tier LAPT
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu128
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt bitsandbytes
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 $env:PYTHONIOENCODING = 'utf-8'
 $env:PYTEST_ADDOPTS = '--basetemp=.pytest_tmp'
 ```
@@ -34,8 +33,9 @@ Chạy lần lượt; chỉ huấn luyện sau khi đọc và đóng băng kết
 .\.venv\Scripts\python.exe scripts/package_submission.py
 ```
 
-`requirements-lock.txt` lưu đúng phiên bản của lần chạy đã báo cáo. Wheel torch CUDA
-cần index riêng như lệnh trên. Corpus bonus và adapter bonus được tách riêng; chạy
+`requirements.txt` pin các thư viện chính và khai báo index wheel CUDA 12.8;
+`requirements-lock.txt` lưu toàn bộ phiên bản của lần chạy đã báo cáo.
+Corpus bonus và adapter bonus được tách riêng; chạy
 bonus không ghi đè adapters/correct hoặc verdict.json của core. B3 dùng trace tổng
 hợp để hai mask thực sự khác nhau, không chỉ đổi biến môi trường trên câu trả lời
 JSON vốn làm hai mode tương đương. B2 kiểm tra tập train/eval không trùng input, nhưng

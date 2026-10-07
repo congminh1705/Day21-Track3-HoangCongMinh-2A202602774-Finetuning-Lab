@@ -1,33 +1,19 @@
-# Lab 21 — full GPU path (NB2-NB6). Verified against PyPI on 2026-08-21.
-#
-# NOTE ON TORCH: install torch for YOUR CUDA build first, then this file.
-#   Colab/Kaggle ................ torch is preinstalled, skip it
-#   Linux + CUDA 12.x ........... pip install torch --index-url https://download.pytorch.org/whl/cu124
-#   macOS (CPU/MPS, no training)  pip install torch
-torch>=2.6,<3
+# Lab 21: exact versions used for the submitted experiments (07-08 Oct 2026).
+# Tested on Windows, Python 3.13, NVIDIA RTX 3050 Ti Laptop, CUDA 12.8 wheels.
+# Install with: python -m pip install -r requirements.txt
+# Full transitive dependency snapshot: submission/requirements-lock.txt.
+# This file reproduces the GPU environment used for the report.
+--extra-index-url https://download.pytorch.org/whl/cu128
 
-# Core training stack.
-transformers>=5.15,<6
-trl>=1.10,<2          # v1.x API: max_length (not max_seq_length), processing_class
-                      # (not tokenizer), chunked_nll default since 1.7
-peft>=0.20,<1
-accelerate>=1.14,<2
-datasets>=5,<6
-
-# Colab preinstalls torchao 0.10.0; peft/transformers reject anything <= 0.16 with
-# "Found an incompatible version of torchao". Nothing in this file pulls torchao in, so
-# without an explicit pin the stale preinstalled copy wins and NB3 dies at
-# get_peft_model(). Verified on Colab 2026-08-21.
-torchao>=0.16
-
-# apply_chat_template needs jinja2, and transformers does NOT depend on it.
-jinja2>=3.1,<4
-tokenizers>=0.22,<1
-
-# 4-bit path — used ONLY by the NB4 `qlora` contrast run. CUDA on Linux/Windows; on macOS
-# skip it and skip that one run (the other two contrasts still work).
-bitsandbytes>=0.50,<1; platform_system == "Linux" or platform_system == "Windows"
-
-# Tooling
-jupytext>=1.17,<2
-pytest>=8.3,<10
+torch==2.11.0+cu128
+transformers==5.19.0
+trl==1.14.2
+peft==0.21.2
+accelerate==1.15.0
+datasets==5.1.0
+torchao==0.18.0
+jinja2==3.1.6
+tokenizers==0.23.2
+bitsandbytes==0.50.2; platform_system == "Linux" or platform_system == "Windows"
+jupytext==1.19.6
+pytest==9.1.1
