@@ -1,0 +1,8 @@
+{
+  "hypothesis": "Muon may underperform AdamW on target at this small step budget; LoRA may limit damage.",
+  "lr": 0.001,
+  "momentum": 0.95,
+  "adjust_lr_fn": "match_rms_adamw",
+  "reason": "Use Muon's own default LR and matrix RMS scaling; do not copy AdamW's LR.",
+  "limitation": "Base pretraining optimizer is unverified; this does not isolate optimizer mismatch."
+}

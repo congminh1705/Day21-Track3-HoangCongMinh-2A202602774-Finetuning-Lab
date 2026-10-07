@@ -187,3 +187,15 @@ def test_prompts_have_exactly_one_definition():
     assert generate.OPTIMIZED_PROMPT is config.OPTIMIZED_PROMPT
     gen_src = (ROOT / "src" / "labkit" / "generate.py").read_text(encoding="utf-8")
     assert "NAIVE_PROMPT = " not in gen_src, "generate.py must import, not redefine"
+
+
+def test_eval_checksum_accepts_git_line_endings_but_rejects_changed_labels(tmp_path):
+    spec = importlib.util.spec_from_file_location("verify_checksums", ROOT / "scripts" / "verify.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    lf, crlf, changed = (tmp_path / name for name in ("lf.jsonl", "crlf.jsonl", "changed.jsonl"))
+    lf.write_bytes(b'{"label": "a", "text": "escaped\\r\\n"}\n')
+    crlf.write_bytes(b'{"label": "a", "text": "escaped\\r\\n"}\r\n')
+    changed.write_bytes(b'{"label": "b", "text": "escaped\\r\\n"}\r\n')
+    assert module._sha(lf) == module._sha(crlf)
+    assert module._sha(lf) != module._sha(changed)

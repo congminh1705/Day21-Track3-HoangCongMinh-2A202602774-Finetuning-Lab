@@ -1,0 +1,2 @@
+# Dataset checksums use the canonical LF representation on every platform.
+*.jsonl text eol=lf

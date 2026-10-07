@@ -1,0 +1,30 @@
+[
+  {
+    "file": "eval_regression.jsonl",
+    "expected": "9c6ba90ea86e28fb",
+    "raw": "cc5d4ce669c329c1",
+    "lf": "9c6ba90ea86e28fb",
+    "git_blob": "9c6ba90ea86e28fb"
+  },
+  {
+    "file": "eval_target.jsonl",
+    "expected": "2991050fefb848c8",
+    "raw": "1d6b5ae8f266d8a8",
+    "lf": "2991050fefb848c8",
+    "git_blob": "2991050fefb848c8"
+  },
+  {
+    "file": "holdout_secret.jsonl",
+    "expected": "be3dd38d058871a5",
+    "raw": "c4c090b57d5b269e",
+    "lf": "be3dd38d058871a5",
+    "git_blob": "be3dd38d058871a5"
+  },
+  {
+    "file": "train_seed.jsonl",
+    "expected": "2a58fe45d7315da0",
+    "raw": "0a60cb6d4cfddc41",
+    "lf": "2a58fe45d7315da0",
+    "git_blob": "2a58fe45d7315da0"
+  }
+]

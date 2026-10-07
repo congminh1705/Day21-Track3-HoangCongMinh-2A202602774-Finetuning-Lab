@@ -33,6 +33,10 @@ if EVAL_LIMIT:
     target, regression = target[:EVAL_LIMIT], regression[:EVAL_LIMIT]
 
 frozen = json.loads((ROOT / "results" / "baselines_frozen.json").read_text(encoding="utf-8"))
+assert frozen["model"] == TIER.model_id, "base model differs from frozen baseline"
+assert frozen["n_regression"] == len(regression), "regression eval slice differs"
+assert frozen["optimized_prompt_sha"] == __import__("hashlib").sha256(
+    generate.OPTIMIZED_PROMPT.encode()).hexdigest()[:16], "baseline prompt changed after freezing"
 base_b = ev.GroupScores(**{k: v for k, v in frozen["baseline_b"].items() if k != "extra"})
 base_a = ev.GroupScores(**{k: v for k, v in frozen["baseline_a"].items() if k != "extra"})
 
@@ -187,15 +191,22 @@ report.write_json(autopsy, "autopsy.json", results_dir=ROOT / "results")
 
 # %%
 rows = []
+baseline_predictions = json.loads(
+    (ROOT / "results" / "baseline_predictions.json").read_text(encoding="utf-8"))
+assert baseline_predictions["target_inputs"] == [r["input"] for r in target], "baseline inputs differ"
 for i, (p, r) in enumerate(zip(preds_ft, target)):
     s_ft = ev.triage_field_accuracy(p, r["label"])
-    rows.append({"i": i, "ticket": r["input"][:70], "ft_score": round(s_ft, 2),
-                 "ft_pred": p.replace("\n", " ")[:90]})
-rows.sort(key=lambda x: x["ft_score"])
-print("--- 3 ca TỆ NHẤT (bắt buộc đưa vào report) ---")
-print(report.markdown_table(rows[:3], ["i", "ticket", "ft_score", "ft_pred"]))
-print("\n--- 3 ca TỐT NHẤT ---")
-print(report.markdown_table(rows[-3:], ["i", "ticket", "ft_score", "ft_pred"]))
+    p_b = baseline_predictions["target_b"][i]
+    s_b = ev.triage_field_accuracy(p_b, r["label"])
+    rows.append({"i": i, "ticket": r["input"], "label": r["label"],
+                 "baseline_score": s_b, "baseline_pred": p_b,
+                 "ft_score": s_ft, "ft_pred": p, "delta": s_ft - s_b,
+                 "outcome": "loss" if s_ft < s_b else "win" if s_ft > s_b else "tie"})
+rows.sort(key=lambda x: (x["delta"], x["ft_score"]))
+print("--- 3 ca có delta THẤP NHẤT so với baseline (b) ---")
+print(report.markdown_table(rows[:3], ["i", "ticket", "baseline_score", "ft_score", "delta", "ft_pred"]))
+print("\n--- 3 ca có delta CAO NHẤT ---")
+print(report.markdown_table(rows[-3:], ["i", "ticket", "baseline_score", "ft_score", "delta", "ft_pred"]))
 report.write_json(rows, "qualitative.json", results_dir=ROOT / "results")
 
 # %% [markdown]

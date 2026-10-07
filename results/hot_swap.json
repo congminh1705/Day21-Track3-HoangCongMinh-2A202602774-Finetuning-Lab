@@ -1,0 +1,23 @@
+{
+  "adapters": [
+    "correct",
+    "attn_only",
+    "wrong_lr"
+  ],
+  "ticket": "Cho mình hỏi, mình đặt chuột không dây mã đơn VN232232. Cho tôi trả lại. Gấp. Shop hỗ trợ tốt.",
+  "predictions": [
+    {
+      "adapter": "correct",
+      "prediction": "{\"intent\": \"doi_tra\", \"urgency\": \"cao\", \"product\": \"chuột không dây\", \"sentiment\": \"tich_cuc\"}"
+    },
+    {
+      "adapter": "attn_only",
+      "prediction": "{\"intent\": \"doi_tra\", \"urgency\": \"cao\", \"product\": \"chuột không dây\", \"sentiment\": \"tich_cuc\"}"
+    },
+    {
+      "adapter": "wrong_lr",
+      "prediction": "{\"intent\": \"sua\", \"urgency\": \"cao\", \"product\": \"chuột không dây\", \"sentiment\": \"cảm ơn\"}"
+    }
+  ],
+  "same_base": true
+}

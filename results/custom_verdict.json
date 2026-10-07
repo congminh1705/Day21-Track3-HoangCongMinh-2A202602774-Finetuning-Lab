@@ -1,0 +1,23 @@
+{
+  "scores": {
+    "run": "lab_support",
+    "thinking": false,
+    "n": 75,
+    "max_new_tokens": 160,
+    "target": 0.9866666666666667,
+    "regression": 0.13333333333333333,
+    "format": 1.0,
+    "latency_ms": 983.0935293331762,
+    "valid_trace_rate": 0.0
+  },
+  "verdict": {
+    "passed": false,
+    "reasons": [
+      "general capability regressed by 0.544 (tolerance 0.020). See deck §6.3 — add 1-5% replay data."
+    ],
+    "target_delta": 0.6433333333333333,
+    "regression_delta": -0.5444444444444444
+  },
+  "n_train": 337,
+  "n_val": 38
+}

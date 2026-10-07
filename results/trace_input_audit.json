@@ -1,0 +1,16 @@
+{
+  "input_sha256_by_mask": {
+    "assistant-only": "82a188084b1099795468bb591c9cadfde47806d5a7f06a4a14e1963d3c3e5414",
+    "response-only": "82a188084b1099795468bb591c9cadfde47806d5a7f06a4a14e1963d3c3e5414"
+  },
+  "identical_inputs": true,
+  "token_stats": {
+    "n": 225,
+    "mean": 138.0,
+    "p50": 138,
+    "p95": 145,
+    "p99": 148,
+    "max": 149,
+    "suggested_max_length": 256
+  }
+}

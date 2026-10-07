@@ -32,7 +32,12 @@ def check(name: str, status: str, detail: str = "") -> None:
 
 
 def _sha(path: pathlib.Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()[:16]
+    payload = path.read_bytes()
+    if path.suffix == ".jsonl":
+        # Git may check LF blobs out as CRLF on Windows. Only record separators
+        # change; escaped newlines inside JSON strings remain byte-for-byte intact.
+        payload = payload.replace(b"\r\n", b"\n")
+    return hashlib.sha256(payload).hexdigest()[:16]
 
 
 def _load_json(path: pathlib.Path):
@@ -101,6 +106,9 @@ REQUIRED_ARTIFACTS = {
     "results/verdict.json": "NB5 — the regression-gate verdict",
     "results/autopsy.json": "NB5 §4 — the NB4 contrasts scored on the TARGET task, "
                             "which is what settles whether a misconfiguration lost",
+    "results/qualitative.json": "NB5 — per-item comparison with baseline (b)",
+    "adapters/correct/adapter_model.safetensors": "NB3 — trained adapter weights",
+    "adapters/correct/adapter_config.json": "NB3 — trained adapter configuration",
     "submission/REPORT.md": "your evaluation report",
 }
 
@@ -198,7 +206,7 @@ def full() -> None:
         check("NB3 run present", OK if "correct" in names else FAIL,
               "" if "correct" in names else "no `correct` row in results/runs.csv")
         missing = {"attn_only", "wrong_lr", "qlora"} - names
-        check("NB4 contrast runs", OK if not missing else WARN,
+        check("NB4 contrast runs", OK if not missing else FAIL,
               "" if not missing else f"missing {sorted(missing)} (core requires all three)")
 
         # Same idea as the trainable-param check below, one axis over: a contrast that
@@ -267,7 +275,8 @@ def main() -> int:
     if fails:
         print("\nNot ready to submit — fix the FAILs above.")
         return 1
-    print("\nReady to submit." + (" Read the warnings first." if warns else ""))
+    message = "Smoke checks passed; full submission checks have not run." if args.smoke else "Ready to submit."
+    print("\n" + message + (" Read the warnings first." if warns else ""))
     return 0
 
 

@@ -24,9 +24,9 @@ torchao>=0.16
 jinja2>=3.1,<4
 tokenizers>=0.22,<1
 
-# 4-bit path — used ONLY by the NB4 `qlora` contrast run. Linux/CUDA only; on macOS
+# 4-bit path — used ONLY by the NB4 `qlora` contrast run. CUDA on Linux/Windows; on macOS
 # skip it and skip that one run (the other two contrasts still work).
-bitsandbytes>=0.50,<1; platform_system == "Linux"
+bitsandbytes>=0.50,<1; platform_system == "Linux" or platform_system == "Windows"
 
 # Tooling
 jupytext>=1.17,<2

@@ -1,0 +1,9 @@
+{
+  "diagnostic_only": true,
+  "official_scores_unchanged": true,
+  "n": 50,
+  "n_first_object_parseable": 50,
+  "n_extra_text_after_first_object": 50,
+  "first_object_field_accuracy": 1.0,
+  "interpretation": "Supplementary parser diagnostic only; repeated JSON breaks official scorer. Do not substitute for official scores."
+}

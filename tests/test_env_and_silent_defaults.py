@@ -58,6 +58,14 @@ def test_explicit_environment_beats_the_file(tmp_path, monkeypatch):
     assert get_tier().name == "BIGGPU"
 
 
+def test_windows_bom_dotenv_reaches_tier(tmp_path, monkeypatch):
+    monkeypatch.delenv("COMPUTE_TIER", raising=False)
+    dotenv = tmp_path / ".env"
+    dotenv.write_text("COMPUTE_TIER=LAPTOP\n", encoding="utf-8-sig")
+    labenv.load_dotenv(dotenv)
+    assert get_tier().name == "LAPTOP"
+
+
 def test_dotenv_also_carries_epochs(tmp_path, monkeypatch):
     """EPOCHS is the lever `training_epochs()` reads; it must survive the file too."""
     from labkit.config import training_epochs

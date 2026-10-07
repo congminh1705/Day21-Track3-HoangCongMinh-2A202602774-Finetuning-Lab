@@ -152,7 +152,7 @@ def main() -> None:
 
 
 def _write(path: pathlib.Path, rows: list[dict]) -> None:
-    with path.open("w", encoding="utf-8") as fh:
+    with path.open("w", encoding="utf-8", newline="\n") as fh:
         for r in rows:
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")
 

@@ -89,6 +89,8 @@ def run_contrast(key: str) -> dict:
     lora_kwargs, _ = train.filter_kwargs(
         LoraConfig, train.lora_config_kwargs(spec, targets), label=f"LoraConfig[{key}]")
 
+    from transformers import set_seed
+    set_seed(42)  # Reset BEFORE LoRA initialization, including each contrast.
     trainer = SFTTrainer(model=model, args=SFTConfig(**sft_kwargs),
                          train_dataset=train_ds, processing_class=tok,
                          peft_config=LoraConfig(**lora_kwargs))
@@ -109,6 +111,8 @@ def run_contrast(key: str) -> dict:
     row = train.summarize_run(spec, TIER, targets, trainable, elapsed, generate.peak_vram_gb())
     row["final_loss"] = round(res.training_loss, 4)
     row["max_steps"] = max_steps
+    row["mask_mode"] = os.environ.get("MASK_MODE", "assistant-only")
+    report.write_json(trainer.state.log_history, f"{key}_training_log.json", results_dir=ROOT / "results")
     row["teaches"] = spec.teaches
     report.append_row(row, results_dir=ROOT / "results")
 

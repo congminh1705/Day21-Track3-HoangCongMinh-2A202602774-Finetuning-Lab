@@ -1,0 +1,9 @@
+{
+  "num_hidden_layers": 24,
+  "full_attention_interval": 4,
+  "linear_num_key_heads": 16,
+  "layer_types": {
+    "linear_attention": 18,
+    "full_attention": 6
+  }
+}

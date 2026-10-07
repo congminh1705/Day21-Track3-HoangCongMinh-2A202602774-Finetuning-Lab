@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 .venv*/
 .pytest_cache/
+.pytest_tmp/
+.pytest_package_tmp/
 .ruff_cache/
 
 # Jupyter
@@ -14,10 +16,10 @@ __pycache__/
 adapters/*/
 !adapters/.gitkeep
 data/split/
-data/CUSTOM_DATASET.md
-results/*.json
-results/*.csv
+# Evaluation evidence is required in the submitted GitHub repository.
+results/pilot_unseeded/
 !results/.gitkeep
+submission/*.zip
 gguf/
 *.gguf
 runs/

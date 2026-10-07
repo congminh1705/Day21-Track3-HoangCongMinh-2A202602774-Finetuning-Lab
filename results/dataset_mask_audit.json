@@ -1,0 +1,13 @@
+{
+  "n": 225,
+  "supervised_tokens": 8564,
+  "total_tokens": 20951,
+  "all_have_loss": true,
+  "any_truncated": false,
+  "prompt_alignment": {
+    "train_render": "<|im_start|>system\nPhân loại ticket sau.<|im_end|>\n<|im_start|>user\nShop ơi, mình đặt tai nghe bluetooth mã đơn VN847706. Sai màu. Đã 3 ngày rồi. Bực mình.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n{\"intent\": \"san_pham_loi\", \"urgency\": \"trung_binh\", \"product\": \"tai nghe bluetooth\", \"sentiment\": \"tieu_cuc\"}<|im_end|>\n",
+    "eval_render": "<|im_start|>system\nPhân loại ticket sau.<|im_end|>\n<|im_start|>user\nShop ơi, mình đặt tai nghe bluetooth mã đơn VN847706. Sai màu. Đã 3 ngày rồi. Bực mình.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "eval_prompt_is_prefix_of_training": true,
+    "supervised_tail": "{\"intent\": \"san_pham_loi\", \"urgency\": \"trung_binh\", \"product\": \"tai nghe bluetooth\", \"sentiment\": \"tieu_cuc\"}<|im_end|>\n"
+  }
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "run": "correct",
+    "thinking": false,
+    "n": 50,
+    "max_new_tokens": 160,
+    "target": 0.985,
+    "regression": 0.03333333333333333,
+    "format": 1.0,
+    "latency_ms": 1147.1346060000724,
+    "valid_trace_rate": 0.0,
+    "rank": 16,
+    "target_modules": "text-linear"
+  },
+  {
+    "run": "rank_8",
+    "thinking": false,
+    "n": 50,
+    "max_new_tokens": 160,
+    "target": 0.93,
+    "regression": 0.13333333333333333,
+    "format": 1.0,
+    "latency_ms": 1149.4866999999795,
+    "valid_trace_rate": 0.0,
+    "rank": 8,
+    "target_modules": "text-linear"
+  },
+  {
+    "run": "rank_64",
+    "thinking": false,
+    "n": 50,
+    "max_new_tokens": 160,
+    "target": 1.0,
+    "regression": 0.0,
+    "format": 1.0,
+    "latency_ms": 1101.2055159998636,
+    "valid_trace_rate": 0.0,
+    "rank": 64,
+    "target_modules": "text-linear"
+  }
+]

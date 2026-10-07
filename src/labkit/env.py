@@ -69,7 +69,7 @@ def load_dotenv(path: pathlib.Path | None = None, *, override: bool = False) -> 
     if path is None or not path.is_file():
         return {}
     applied: dict[str, str] = {}
-    for key, value in parse(path.read_text(encoding="utf-8")).items():
+    for key, value in parse(path.read_text(encoding="utf-8-sig")).items():
         if not override and key in os.environ:
             continue
         os.environ[key] = value

@@ -1,0 +1,27 @@
+{
+  "baseline_a": {
+    "run": "base",
+    "thinking": false,
+    "n": 75,
+    "max_new_tokens": 160,
+    "target": 0.0,
+    "regression": 0.6777777777777777,
+    "format": 0.0,
+    "latency_ms": 2741.0383586666044,
+    "valid_trace_rate": 0.0
+  },
+  "baseline_b": {
+    "run": "base",
+    "thinking": false,
+    "n": 75,
+    "max_new_tokens": 160,
+    "target": 0.3433333333333333,
+    "regression": 0.6777777777777777,
+    "format": 1.0,
+    "latency_ms": 993.9502253333922,
+    "valid_trace_rate": 0.0
+  },
+  "optimized_prompt": "Bạn phân loại yêu cầu hỗ trợ phòng lab máy tính. Chỉ trả về JSON với 4 khóa intent, urgency, product, sentiment. intent thuộc mat_ket_noi, loi_phan_mem, thiet_bi_loi, tai_khoan, yeu_cau_cai_dat. urgency: cao nếu thi/kiểm tra đang diễn ra; trung_binh nếu đang thực hành; thap nếu chuẩn bị buổi sau. sentiment: tieu_cuc nếu bực mình; trung_tinh nếu thông báo; tich_cuc nếu cảm ơn và hài lòng. product là tên máy nguyên văn, không bao gồm mã thiết bị.",
+  "eval_sha256": "086e73b1d5ca07e674b38f4960859bc4e21c9960199f00122917e66d02917469",
+  "model": "Qwen/Qwen3.5-0.8B"
+}

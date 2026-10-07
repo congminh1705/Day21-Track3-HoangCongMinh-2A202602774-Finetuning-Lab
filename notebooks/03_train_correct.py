@@ -136,6 +136,8 @@ print(json.dumps({k: str(v) for k, v in sft_kwargs.items()}, indent=2)[:900])
 
 # %%
 generate.free_memory()
+from transformers import set_seed
+set_seed(42)  # TRL creates LoRA before Trainer.__init__ sets args.seed.
 trainer = SFTTrainer(
     model=model,
     args=SFTConfig(**sft_kwargs),
@@ -172,6 +174,7 @@ row["mask_mode"] = MASK_MODE
 # Record the step budget so NB5/verify can CHECK that the four runs are comparable,
 # instead of trusting that they were configured the same way.
 row["max_steps"] = STEPS
+report.write_json(trainer.state.log_history, "correct_training_log.json", results_dir=ROOT / "results")
 report.append_row(row, results_dir=ROOT / "results")
 print(json.dumps(row, ensure_ascii=False, indent=2))
 

@@ -17,6 +17,8 @@ import sys
 import time
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from labkit.config import get_tier
 
 STAGES = {
     "nb1": ("notebooks/01_data_and_mask.py", "data, chat template & loss mask"),
@@ -38,7 +40,7 @@ def main(argv: list[str]) -> int:
         print(f"unknown stage(s) {bad}; pick from {list(STAGES)} or 'all'", file=sys.stderr)
         return 2
 
-    print(f"tier={os.environ.get('COMPUTE_TIER', 'T4')}  "
+    print(f"tier={get_tier().name}  "
           f"mask={os.environ.get('MASK_MODE', 'assistant-only')}  "
           f"eval_limit={os.environ.get('EVAL_LIMIT') or 'full'}")
 

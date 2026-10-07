@@ -1,0 +1,11 @@
+{
+  "run": "muon",
+  "thinking": false,
+  "n": 50,
+  "max_new_tokens": 160,
+  "target": 0.0,
+  "regression": 0.0,
+  "format": 0.0,
+  "latency_ms": 4479.589313999968,
+  "valid_trace_rate": 0.0
+}

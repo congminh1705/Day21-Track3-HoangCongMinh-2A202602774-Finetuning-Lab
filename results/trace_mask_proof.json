@@ -1,0 +1,14 @@
+[
+  {
+    "mask_mode": "assistant-only",
+    "n": 225,
+    "supervised_tokens": 19124,
+    "preview": "Ticket nhắc đến tai nghe bluetooth. Nội dung yêu cầu thuộc nhóm san_pham_loi; tín hiệu thời gian và thái độ được gán lần lượt trung_binh và tieu_cuc theo nhãn của bộ dữ liệu.\n</think>\n\n{\"intent\": \"san_pham_loi\", \"urgency\": \"trung_binh\", \"product\": \"tai nghe bluetooth\", \"sentiment\": \"tieu_cuc\"}<|im_end|>\n"
+  },
+  {
+    "mask_mode": "response-only",
+    "n": 225,
+    "supervised_tokens": 8789,
+    "preview": "\n\n{\"intent\": \"san_pham_loi\", \"urgency\": \"trung_binh\", \"product\": \"tai nghe bluetooth\", \"sentiment\": \"tieu_cuc\"}<|im_end|>\n"
+  }
+]
